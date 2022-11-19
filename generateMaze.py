@@ -39,6 +39,13 @@ def putWall(data: str):
     return ",".join(cell_data)
 
 
+def generateCsvFileMaze(maze_csv):
+    with open("maze.csv", "w") as file:
+        data = "".join(maze_csv)
+        file.write(data)
+
+
+
 def generateMaze(numbersWalls: int):
     default_maze = getlinesFromDefaultMaze()
 
@@ -46,5 +53,5 @@ def generateMaze(numbersWalls: int):
 
     maze_with_walls = generateWallsForMaze(default_maze, numbersWalls)
 
+    generateCsvFileMaze(maze_with_walls)
 
-generateMaze(10)

@@ -54,7 +54,7 @@ def aStar(m):
 
 if __name__ == '__main__':
     m = maze(8, 8)
-    m.CreateMaze(x=2, y=2) # x y y son los puntos finales
+    m.CreateMaze(x=2, y=2, loadMaze="maze.csv")
     path = aStar(m)
 
     a = agent(m, footprints=True)

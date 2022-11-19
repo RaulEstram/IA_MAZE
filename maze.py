@@ -1,6 +1,6 @@
 from pyamaze import *
 from queue import PriorityQueue
-
+import generateMaze
 
 # duncion para obtener la distancia entre celdas
 def h(cell1, cell2):
@@ -65,8 +65,10 @@ def aStar(laberintoData, xInicial, yInicial, xFinal, yFinal):
 
 if __name__ == '__main__':
     m = maze(8, 8)
-    m.CreateMaze(x=5, y=5, loadMaze="cleanMaze.csv")
-    path = aStar(m, 8, 8 , 5, 5)
+    generateMaze.generateMaze(60)
+    #m.CreateMaze(x=1, y=1, saveMaze=False, loadMaze="maze--2022-11-19--14-19-44.csv")
+    m.CreateMaze(x=1, y=1, saveMaze=False, loadMaze="maze.csv")
+    path = aStar(m, 8, 8 , 1, 1)
 
     a = agent(m, footprints=True)
     m.tracePath({a: path})
