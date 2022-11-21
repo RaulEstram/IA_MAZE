@@ -31,6 +31,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/maze--2022-11-20--19-14-23.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/maze--2022-11-20--19-14-59.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/maze.csv">
           <value>
             <Attribute>

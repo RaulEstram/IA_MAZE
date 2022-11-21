@@ -1,6 +1,7 @@
 from pyamaze import *
 from queue import PriorityQueue
-import generateMaze
+from generateMaze import generateMaze
+
 
 # duncion para obtener la distancia entre celdas
 def h(cell1, cell2):
@@ -35,7 +36,7 @@ def aStar(laberintoData, xInicial, yInicial, xFinal, yFinal):
         # comprobamos si llegamos a la meta
         if currCell == (xFinal, yFinal):
             break
-        # comrpbamos para donde nos podemos mover y nos movemos
+        # comrpbamos para donde nos podemos mover
         for d in 'ESNW':
             if laberintoData.maze_map[currCell][d] == True:
                 if d == 'E':
@@ -48,8 +49,8 @@ def aStar(laberintoData, xInicial, yInicial, xFinal, yFinal):
                     childCell = (currCell[0] + 1, currCell[1])
                 # variables temporales que ocuparemos
                 temp_g_score = g_score[currCell] + 1
-                temp_f_score = temp_g_score + h(childCell, (xFinal, yFinal)) #TODO: cambiar si tan mal
-
+                temp_f_score = temp_g_score + h(childCell, (xFinal, yFinal))
+                # vemos cual es mejor para movernos
                 if temp_f_score < f_score[childCell]:
                     g_score[childCell] = temp_g_score
                     f_score[childCell] = temp_f_score
@@ -64,14 +65,18 @@ def aStar(laberintoData, xInicial, yInicial, xFinal, yFinal):
 
 
 if __name__ == '__main__':
-    m = maze(8, 8)
-    generateMaze.generateMaze(60)
-    #m.CreateMaze(x=1, y=1, saveMaze=False, loadMaze="maze--2022-11-19--14-19-44.csv")
-    m.CreateMaze(x=1, y=1, saveMaze=False, loadMaze="maze.csv")
-    path = aStar(m, 8, 8 , 1, 1)
+    cor1 = int(input("Digite la cordenada y: "))
+    cor2 = int(input("Digite la cordenada x: "))
+    obstaculos = int(input("Cantidad de obstaculos: "))
+    try:
+        generateMaze(obstaculos)
+        m = maze(8, 8)
+        m.CreateMaze(x=cor1, y=cor2, saveMaze=False, loadMaze="maze.csv")
+        path = aStar(m, 8, 8, cor1, cor2)
+        a = agent(m, footprints=True)
+        m.tracePath({a: path})
+        l = textLabel(m, 'A Star Path Length', len(path) + 1)
+        m.run()
+    except KeyError:
+        pass
 
-    a = agent(m, footprints=True)
-    m.tracePath({a: path})
-    l = textLabel(m, 'A Star Path Length', len(path) + 1)
-
-    m.run()
